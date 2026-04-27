@@ -15,7 +15,7 @@ func TestGetAPIKey(t *testing.T) {
 	}
 
 	want := "some-secret-key"
-	// if got != want {
+	if got != want {
 		t.Errorf("expected %v, got %v", want, got)
 	}
 }
