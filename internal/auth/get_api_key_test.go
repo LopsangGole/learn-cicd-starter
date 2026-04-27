@@ -1,14 +1,21 @@
-func TestCalculateSum(t *testing.T) {
-    // Arrange
-    inputA := 2
-    inputB := 3
-    expected := 5
+package auth
 
-    // Act
-    actual := CalculateSum(inputA, inputB)
+import (
+	"net/http"
+	"testing"
+)
 
-    // Assert
-    if actual != expected {
-        t.Errorf("expected %v, got %v", expected, actual)
-    }
+func TestGetAPIKey(t *testing.T) {
+	headers := http.Header{}
+	headers.Set("Authorization", "ApiKey some-secret-key")
+
+	got, err := GetAPIKey(headers)
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	want := "some-secret-key"
+	if got != want {
+		t.Errorf("expected %v, got %v", want, got)
+	}
 }
